@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="row" style="padding-top:40px;">
+        <div class="col-sm-1">
+            <label>Select User</label>
+        </div>
+        <div class="col-md-2">
+            <select class="form-control" id="userid" (change)="showData($event)">
+                <option value="">Select User</option>
+                <option *ngFor="let item of userName" [value]="item">{{item}}</option>
+            </select>
+        </div>
+    </div>
+    <br>
+    <div class="row" *ngIf="usersInfo.length>0">
+        <div class="col-md-5">
+            <table class="table table-striped" style="font-size: 12px;">
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>User</th>
+                        <th>Commit Id</th>
+                        <th>Status</th>
+                        <th>Start</th>
+                        <th>End</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let info of usersInfo">
+                        <td>{{ info.event }}</td>
+                        <td>{{ info.user }}</td>
+                        <td>{{ info.commit_id }}</td>
+                        <td>{{ info.status }}</td>
+                        <td>{{ info.start }}</td>
+                        <td>{{ info.end }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-7">
+            <h4 style="text-align:center">Bar chart User Data</h4>
+            <div style="display: block;">
+                <canvas baseChart 
+                  [datasets]="barChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [plugins]="barChartPlugins"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType">
+                </canvas>
+              </div>
+        </div>
+    </div>
+</div>
